@@ -7,7 +7,6 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.controller.SuprimentoController;
-import br.com.pedrohenrique.projetofinal.model.Suprimento;
 
 public class AdicionarSuprimentoActivity extends AppCompatActivity {
 

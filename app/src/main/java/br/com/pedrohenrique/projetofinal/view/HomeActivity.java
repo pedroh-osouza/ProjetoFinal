@@ -4,7 +4,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;

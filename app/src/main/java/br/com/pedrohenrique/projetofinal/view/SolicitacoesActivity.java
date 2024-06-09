@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,7 +16,6 @@ import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.adapters.SolicitacoesListAdapter;
 import br.com.pedrohenrique.projetofinal.controller.SolicitacaoController;
 import br.com.pedrohenrique.projetofinal.model.Solicitacao;
-import br.com.pedrohenrique.projetofinal.model.Suprimento;
 
 public class SolicitacoesActivity extends AppCompatActivity {
     private ListView listViewSolicitacoes;
@@ -40,17 +38,10 @@ public class SolicitacoesActivity extends AppCompatActivity {
 
         consultarSolicitacoes();
         listViewSolicitacoes.setOnItemClickListener((parent, view, position, id) -> {
-            // Obter a solicitação clicada
             Solicitacao solicitacaoClicada = solicitacaoList.get(position);
-
-            // Criar uma Intent para iniciar DetalhesSolicitacaoActivity
             Intent intent = new Intent(SolicitacoesActivity.this, DetalhesSolicitacaoActivity.class);
-
-            // Adicionar os dados da solicitação à Intent
             intent.putExtra("suprimentoUid", solicitacaoClicada.suprimentoUid);
             intent.putExtra("solicitacaoUid", solicitacaoClicada.uid);
-
-            // Iniciar DetalhesSolicitacaoActivity
             startActivity(intent);
         });
     }

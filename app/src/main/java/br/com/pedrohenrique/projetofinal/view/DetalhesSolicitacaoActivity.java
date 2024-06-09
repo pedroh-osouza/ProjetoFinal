@@ -15,7 +15,6 @@ import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
 import br.com.pedrohenrique.projetofinal.model.Solicitacao;
 import br.com.pedrohenrique.projetofinal.model.Suprimento;
 import br.com.pedrohenrique.projetofinal.model.Usuario;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;

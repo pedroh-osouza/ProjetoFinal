@@ -6,13 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -44,7 +42,6 @@ public class CadastroActivity extends AppCompatActivity {
                 String senha = etPassword.getText().toString().trim();
                 String telefone = etPhone.getText().toString().trim();
 
-                // Verifica se os campos não estão vazios
                 if (nome.isEmpty() || email.isEmpty() || endereco.isEmpty() || senha.isEmpty() || telefone.isEmpty()) {
                     Toast.makeText(CadastroActivity.this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {

@@ -1,18 +1,15 @@
 package br.com.pedrohenrique.projetofinal.view;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
