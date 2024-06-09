@@ -17,22 +17,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 
+import br.com.pedrohenrique.projetofinal.model.Suprimento;
 import br.com.pedrohenrique.projetofinal.model.Usuario;
 
 public class UsuarioController {
 
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private FirebaseFirestore db;
 
     public UsuarioController()
     {
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        db = FirebaseFirestore.getInstance();
     }
     public String getUidUsuarioAtual() {
         FirebaseUser usuarioFirebase = mAuth.getCurrentUser();
@@ -53,10 +56,10 @@ public class UsuarioController {
 
     }
 
-    public boolean cadastrar(String nome, String email, String senha, String telefone, String endereco)
+    public void cadastrar(String nome, String email, String senha, String telefone, String endereco)
     {
         this.cadastraFirebaseAuth(email, senha);
-        return this.cadastraUsuarioRealtimeDatabase(nome, telefone, endereco);
+        this.cadastraUsuarioRealtimeDatabase(nome, telefone, endereco);
     }
 
     private void cadastraFirebaseAuth(String email, String senha)
@@ -71,20 +74,13 @@ public class UsuarioController {
         });
     }
 
-    private boolean cadastraUsuarioRealtimeDatabase(String nome, String telefone, String endereco)
+    private void cadastraUsuarioRealtimeDatabase(String nome, String telefone, String endereco)
     {
         FirebaseUser usuarioFirebase = mAuth.getCurrentUser();
-        if(usuarioFirebase == null) return false;
+        if(usuarioFirebase == null) return;
         String uid = usuarioFirebase.getUid();
         Usuario usuario = new Usuario(uid, nome, usuarioFirebase.getEmail(), telefone, endereco);
-        mDatabase.child("usuarios").child(uid).setValue(usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()) {
-                    System.out.println("cadastrou");
-                }
-            }
-        });
-        return true;
+        DocumentReference referencia = db.collection("usuarios").document();
+        referencia.set(usuario);
     }
 }
