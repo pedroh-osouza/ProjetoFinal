@@ -1,6 +1,8 @@
 package br.com.pedrohenrique.projetofinal.view;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
@@ -8,6 +10,9 @@ import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,9 +47,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UsuarioController usuarioController = new UsuarioController(MainActivity.this);
-                usuarioController.loginConvidado();
-                Intent guestIntent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(guestIntent);
+                usuarioController.loginConvidado().addOnCompleteListener(new OnCompleteListener<Boolean>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Boolean> task) {
+                        if(task.isSuccessful()) {
+                            Intent guestIntent = new Intent(MainActivity.this, HomeActivity.class);
+                            startActivity(guestIntent);
+                        }
+                    }
+                });
             }
         });
 

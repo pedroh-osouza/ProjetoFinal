@@ -36,7 +36,7 @@ public class UsuarioController {
 
     public boolean isConvidado() {
         FirebaseUser usuarioFirebase = mAuth.getCurrentUser();
-        return usuarioFirebase != null && usuarioFirebase.isAnonymous();
+        return usuarioFirebase.isAnonymous();
     }
 
     public Task<Boolean> loginConvidado() {

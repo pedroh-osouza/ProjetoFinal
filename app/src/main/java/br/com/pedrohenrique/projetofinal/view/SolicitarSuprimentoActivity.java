@@ -11,17 +11,13 @@ import java.util.Date;
 import java.util.Locale;
 import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.controller.SolicitacaoController;
-import br.com.pedrohenrique.projetofinal.controller.SuprimentoController;
 import br.com.pedrohenrique.projetofinal.model.Solicitacao;
-import br.com.pedrohenrique.projetofinal.model.Suprimento;
 
 public class SolicitarSuprimentoActivity extends AppCompatActivity {
     private TextView tvSupplyDetails;
     private EditText etNomeSolicitante, etEnderecoSolicitante, etContatoSolicitante;
     private Button btnRequestSupply;
-    private SuprimentoController suprimentoController;
     private SolicitacaoController solicitacaoController;
-    private Suprimento suprimento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +29,6 @@ public class SolicitarSuprimentoActivity extends AppCompatActivity {
         etEnderecoSolicitante = findViewById(R.id.etEnderecoSolicitante);
         etContatoSolicitante = findViewById(R.id.etContatoSolicitante);
         btnRequestSupply = findViewById(R.id.btnRequestSupply);
-        suprimentoController = new SuprimentoController(this);
         solicitacaoController = new SolicitacaoController(this);
 
         String suprimentoUid = getIntent().getStringExtra("suprimentoUid");
@@ -51,7 +46,7 @@ public class SolicitarSuprimentoActivity extends AppCompatActivity {
                 return;
             }
 
-            String dataSolicitacao = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            String dataSolicitacao = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
             String status = "PENDENTE";
 
             Solicitacao solicitacao = new Solicitacao(

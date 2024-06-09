@@ -2,37 +2,57 @@ package br.com.pedrohenrique.projetofinal.view;
 
 import android.os.Bundle;
 import android.widget.ListView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.adapters.SolicitacoesListAdapter;
+import br.com.pedrohenrique.projetofinal.controller.SolicitacaoController;
 import br.com.pedrohenrique.projetofinal.model.Solicitacao;
-import android.view.View;
-import android.widget.AdapterView;
+import br.com.pedrohenrique.projetofinal.model.Suprimento;
 
 public class SolicitacoesActivity extends AppCompatActivity {
-    private ListView listViewSupplies;
-    private ArrayList<Solicitacao> supplyList;
+    private ListView listViewSolicitacoes;
+    private ArrayList<Solicitacao> solicitacaoList;
+    private SolicitacoesListAdapter adapter;
+    private SolicitacaoController solicitacaoController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitacoes);
 
-        listViewSupplies = findViewById(R.id.listViewRequests);
+        listViewSolicitacoes = findViewById(R.id.listViewSolicitacoes);
+        solicitacaoList = new ArrayList<>();
+        adapter = new SolicitacoesListAdapter(this, solicitacaoList);
+        listViewSolicitacoes.setAdapter(adapter);
+        solicitacaoController = new SolicitacaoController(this);
 
-        supplyList = new ArrayList<>();
-        supplyList.add(new Solicitacao("1", "predo", "logo ali", "123", "1", "2023", "a"));
-        supplyList.add(new Solicitacao("1", "predo", "ali po", "123", "1", "2023", "a"));
+        consultarSolicitacoes();
+    }
 
-        SolicitacoesListAdapter adapter = new SolicitacoesListAdapter(this, supplyList);
-
-        listViewSupplies.setAdapter(adapter);
-        listViewSupplies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void consultarSolicitacoes() {
+        solicitacaoController.consultarSolicitacoes().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Aqui você pode implementar a lógica para editar ou excluir o suprimento selecionado
-                // Por exemplo, você pode abrir uma nova atividade para edição ou exclusão do suprimento
-                // Neste exemplo, não implementaremos essa lógica
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    solicitacaoList.clear();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String uid = document.getId();
+                        String nomeSolicitante = document.getString("nomeSolicitante");
+                        String enderecoSolicitante = document.getString("enderecoSolicitante");
+                        String contatoSolicitante = document.getString("contatoSolicitante");
+                        String suprimentoUid = document.getString("suprimentoUid");
+                        String dataSolicitacao = document.getString("dataSolicitacao");
+                        String status = document.getString("status");
+                        solicitacaoList.add(new Solicitacao(uid, nomeSolicitante, enderecoSolicitante, contatoSolicitante, suprimentoUid, dataSolicitacao,status));
+                    }
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
     }
