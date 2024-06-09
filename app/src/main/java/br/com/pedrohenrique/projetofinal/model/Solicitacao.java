@@ -8,6 +8,9 @@ public class Solicitacao {
     public String dataSolicitacao;
     public String status;
 
+    public Solicitacao() {
+    }
+
     public Solicitacao(String uid, String nomeSolicitante, String enderecoSolicitante, String contatoSolicitante, String suprimentoUid, String dataSolicitacao, String status) {
         this.uid = uid;
         this.nomeSolicitante = nomeSolicitante;

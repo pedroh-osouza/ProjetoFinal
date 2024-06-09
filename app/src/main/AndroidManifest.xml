@@ -28,6 +28,7 @@
         <activity android:name=".view.HomeActivity"/>
         <activity android:name=".view.AdicionarSuprimentoActivity"/>
         <activity android:name=".view.SolicitarSuprimentoActivity"/>
+        <activity android:name=".view.DetalhesSolicitacaoActivity"/>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package br.com.pedrohenrique.projetofinal.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
@@ -33,6 +34,20 @@ public class SolicitacoesActivity extends AppCompatActivity {
         solicitacaoController = new SolicitacaoController(this);
 
         consultarSolicitacoes();
+        listViewSolicitacoes.setOnItemClickListener((parent, view, position, id) -> {
+            // Obter a solicitação clicada
+            Solicitacao solicitacaoClicada = solicitacaoList.get(position);
+
+            // Criar uma Intent para iniciar DetalhesSolicitacaoActivity
+            Intent intent = new Intent(SolicitacoesActivity.this, DetalhesSolicitacaoActivity.class);
+
+            // Adicionar os dados da solicitação à Intent
+            intent.putExtra("suprimentoUid", solicitacaoClicada.suprimentoUid);
+            intent.putExtra("solicitacaoUid", solicitacaoClicada.uid);
+
+            // Iniciar DetalhesSolicitacaoActivity
+            startActivity(intent);
+        });
     }
 
     private void consultarSolicitacoes() {

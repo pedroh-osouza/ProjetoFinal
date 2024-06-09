@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Título da tela -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detalhes da Solicitação"
+        android:textSize="24sp"
+        android:textColor="@color/green_primary"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp" />
+
+    <!-- Nome do Solicitante -->
+    <TextView
+        android:id="@+id/tvNomeSolicitante"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nome do Solicitante"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Endereço do Solicitante -->
+    <TextView
+        android:id="@+id/tvEnderecoSolicitante"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Endereço do Solicitante"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvNomeSolicitante"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Contato do Solicitante -->
+    <TextView
+        android:id="@+id/tvContatoSolicitante"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Contato do Solicitante"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvEnderecoSolicitante"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Endereço de Entrega -->
+    <TextView
+        android:id="@+id/tvEnderecoEntrega"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Endereço de Entrega"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvContatoSolicitante"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Contato de Entrega -->
+    <TextView
+        android:id="@+id/tvContatoEntrega"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Contato de Entrega"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvEnderecoEntrega"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Status da Solicitação -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status Atual da Solicitação: "
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvContatoEntrega"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Botões de atualização de status -->
+    <RadioGroup
+        android:id="@+id/rgStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp">
+
+        <RadioButton
+            android:id="@+id/rbPendente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pendente"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rbEmRota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Em Rota"/>
+
+        <RadioButton
+            android:id="@+id/rbConcluida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Concluída"/>
+    </RadioGroup>
+
+    <!-- Botão de Confirmar -->
+    <Button
+        android:id="@+id/btnConfirmar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Atualizar Status"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

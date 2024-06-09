@@ -3,6 +3,7 @@ package br.com.pedrohenrique.projetofinal.controller;
 import android.content.Context;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -26,5 +27,9 @@ public class SolicitacaoController {
     public Task<QuerySnapshot> consultarSolicitacoes() {
         CollectionReference suprimentosRef = db.collection("solicitacoes");
         return suprimentosRef.get();
+    }
+
+    public Task<DocumentSnapshot> consultarSolicitacao(String uid) {
+        return db.collection("solicitacoes").document(uid).get();
     }
 }

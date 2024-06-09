@@ -47,7 +47,7 @@ public class SolicitarSuprimentoActivity extends AppCompatActivity {
             }
 
             String dataSolicitacao = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-            String status = "PENDENTE";
+            String status = "Pendente";
 
             Solicitacao solicitacao = new Solicitacao(
                     null,

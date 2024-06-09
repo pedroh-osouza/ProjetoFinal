@@ -8,6 +8,9 @@ public class Usuario {
     public String telefone;
     public String endereco;
 
+    public Usuario() {
+    }
+
     public Usuario(String uid, String nome, String email, String telefone, String endereco) {
         this.uid = uid;
         this.nome = nome;
