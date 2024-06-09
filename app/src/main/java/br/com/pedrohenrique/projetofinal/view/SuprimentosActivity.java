@@ -43,7 +43,10 @@ public class SuprimentosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Suprimento suprimentoSelecionado = supplyList.get(position);
-                Toast.makeText(SuprimentosActivity.this, "Você clicou no suprimento: " + suprimentoSelecionado.descricao, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SuprimentosActivity.this, SolicitarSuprimentoActivity.class);
+                intent.putExtra("suprimentoUid", suprimentoSelecionado.uid);
+                intent.putExtra("suprimentoDescricao", suprimentoSelecionado.descricao);
+                startActivity(intent);
             }
         });
         btnAddSupply.setOnClickListener(new View.OnClickListener() {
