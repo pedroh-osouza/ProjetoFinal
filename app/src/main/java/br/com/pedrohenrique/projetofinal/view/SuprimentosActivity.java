@@ -3,6 +3,7 @@ package br.com.pedrohenrique.projetofinal.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -37,6 +38,14 @@ public class SuprimentosActivity extends AppCompatActivity {
         listViewSupplies.setAdapter(adapter);
         suprimentoController = new SuprimentoController(this);
         consultarSuprimentos();
+
+        listViewSupplies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Suprimento suprimentoSelecionado = supplyList.get(position);
+                Toast.makeText(SuprimentosActivity.this, "Você clicou no suprimento: " + suprimentoSelecionado.descricao, Toast.LENGTH_SHORT).show();
+            }
+        });
         btnAddSupply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
