@@ -32,12 +32,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (email.isEmpty() || senha.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    UsuarioController usuarioController = new UsuarioController();
-                    usuarioController.logar(email, senha);
-                    Toast.makeText(LoginActivity.this, "Login bem-sucedido", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
+                    UsuarioController usuarioController = new UsuarioController(LoginActivity.this);
+                    if(usuarioController.logar(email, senha).isSuccessful()) {
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    };
                 }
             }
         });

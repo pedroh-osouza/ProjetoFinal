@@ -21,8 +21,8 @@ public class SolicitacoesActivity extends AppCompatActivity {
         listViewSupplies = findViewById(R.id.listViewRequests);
 
         supplyList = new ArrayList<>();
-        supplyList.add(new Solicitacao("1", "predo", "1", "2024-02-14", "ENTREGUE"));
-        supplyList.add(new Solicitacao("1", "predo", "1", "2024-02-14", "ENTREGUE"));
+        supplyList.add(new Solicitacao("1", "predo", "logo ali", "123", "1", "2023", "a"));
+        supplyList.add(new Solicitacao("1", "predo", "ali po", "123", "1", "2023", "a"));
 
         SolicitacoesListAdapter adapter = new SolicitacoesListAdapter(this, supplyList);
 

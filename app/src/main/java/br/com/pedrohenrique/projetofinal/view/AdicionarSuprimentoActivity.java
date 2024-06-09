@@ -32,7 +32,7 @@ public class AdicionarSuprimentoActivity extends AppCompatActivity {
                 String descricao = etDescricao.getText().toString();
                 int quantidade = Integer.parseInt(etQuantidade.getText().toString());
                 String unidadeMedida = etUnidadeMedida.getText().toString();
-                SuprimentoController suprimentoController = new SuprimentoController();
+                SuprimentoController suprimentoController = new SuprimentoController(AdicionarSuprimentoActivity.this);
                 suprimentoController.cadastrar(descricao, quantidade, unidadeMedida);
                 finish();
             }

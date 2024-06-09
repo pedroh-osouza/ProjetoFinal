@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.adapters.SuprimentosListAdapter;
+import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
 import br.com.pedrohenrique.projetofinal.model.Suprimento;
 import br.com.pedrohenrique.projetofinal.controller.SuprimentoController;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,20 +30,21 @@ public class SuprimentosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suprimentos);
-
         listViewSupplies = findViewById(R.id.listViewSupplies);
         Button btnAddSupply = findViewById(R.id.btnAddSupply);
         supplyList = new ArrayList<>();
         adapter = new SuprimentosListAdapter(this, supplyList);
         listViewSupplies.setAdapter(adapter);
-        suprimentoController = new SuprimentoController();
-
-        // Consultar os suprimentos no Firebase Firestore
+        suprimentoController = new SuprimentoController(this);
         consultarSuprimentos();
-
         btnAddSupply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UsuarioController usuarioController = new UsuarioController(SuprimentosActivity.this);
+                if(usuarioController.isConvidado()) {
+                    Toast.makeText(SuprimentosActivity.this, "Faça login para cadastrar um suprimento", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(SuprimentosActivity.this, AdicionarSuprimentoActivity.class);
                 startActivity(intent);
             }
@@ -52,11 +56,8 @@ public class SuprimentosActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    // Limpa a lista atual de suprimentos
                     supplyList.clear();
-
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        // Para cada documento encontrado, cria um objeto Suprimento e adiciona à lista
                         String uid = document.getId();
                         String descricao = document.getString("descricao");
                         Integer quantidade = document.getLong("quantidade").intValue();
@@ -64,10 +65,9 @@ public class SuprimentosActivity extends AppCompatActivity {
                         String usuarioUid = document.getString("usuarioUid");
                         supplyList.add(new Suprimento(uid, descricao, quantidade, unidadeMedida, usuarioUid));
                     }
-                    // Notifica o adapter que os dados foram alterados
                     adapter.notifyDataSetChanged();
                 } else {
-                    // Tratar erro
+
                 }
             }
         });
@@ -76,7 +76,6 @@ public class SuprimentosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Recarrega a lista de suprimentos ao retomar a atividade
         consultarSuprimentos();
     }
 }

@@ -43,7 +43,7 @@ public class CadastroActivity extends AppCompatActivity {
                 if (nome.isEmpty() || email.isEmpty() || endereco.isEmpty() || senha.isEmpty() || telefone.isEmpty()) {
                     Toast.makeText(CadastroActivity.this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    UsuarioController usuarioController = new UsuarioController();
+                    UsuarioController usuarioController = new UsuarioController(CadastroActivity.this);
                     usuarioController.cadastrar(nome, email, senha, telefone, endereco);
                     Intent intent = new Intent(CadastroActivity.this, LoginActivity.class);
                     startActivity(intent);

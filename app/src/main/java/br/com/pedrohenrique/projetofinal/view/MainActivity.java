@@ -3,6 +3,8 @@ package br.com.pedrohenrique.projetofinal.view;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.pedrohenrique.projetofinal.R;
+import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -39,9 +41,10 @@ public class MainActivity extends AppCompatActivity {
         btnGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent para a tela de convidado, substitua GuestActivity pela sua activity de convidado
-                //Intent guestIntent = new Intent(MainActivity.this, GuestActivity.class);
-                //startActivity(guestIntent);
+                UsuarioController usuarioController = new UsuarioController(MainActivity.this);
+                usuarioController.loginConvidado();
+                Intent guestIntent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(guestIntent);
             }
         });
 

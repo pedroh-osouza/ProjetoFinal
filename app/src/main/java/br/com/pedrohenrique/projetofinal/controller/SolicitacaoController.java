@@ -1,18 +1,22 @@
 package br.com.pedrohenrique.projetofinal.controller;
 
+import android.content.Context;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import br.com.pedrohenrique.projetofinal.model.Solicitacao;
+
 public class SolicitacaoController {
+    private FirebaseFirestore db;
+    private Context context;
 
-    public SolicitacaoController()
-    {
-
+    public SolicitacaoController(Context context) {
+        this.context = context;
+        db = FirebaseFirestore.getInstance();
     }
 
-    public void consultar()
-    {
-
-    }
-    public void cadastrar()
-    {
-
+    public Task<Void> cadastrarSolicitacao(Solicitacao solicitacao) {
+        String uid = db.collection("solicitacoes").document().getId();
+        solicitacao.uid = uid;
+        return db.collection("solicitacoes").document(uid).set(solicitacao);
     }
 }

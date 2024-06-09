@@ -1,12 +1,15 @@
 package br.com.pedrohenrique.projetofinal.controller;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
@@ -29,11 +33,13 @@ import br.com.pedrohenrique.projetofinal.model.Usuario;
 
 public class UsuarioController {
 
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
+    private final FirebaseAuth mAuth;
+    private final FirebaseFirestore db;
+    private final Context context;
 
-    public UsuarioController()
+    public UsuarioController(Context context)
     {
+        this.context = context;
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
     }
@@ -43,19 +49,42 @@ public class UsuarioController {
         return usuarioFirebase.getUid();
     }
 
-    public void logar(String email, String senha)
+    public boolean isConvidado()
     {
-        mAuth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-
-                }
-            }
-        });
-
+        FirebaseUser usuarioFirebase = mAuth.getCurrentUser();
+        return true;
     }
 
+    public void loginConvidado()
+    {
+        mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+            }
+        });
+    }
+    public Task<Boolean> logar(String email, String senha) {
+        TaskCompletionSource<Boolean> taskCompletionSource = new TaskCompletionSource<>();
+
+        try {
+            mAuth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        taskCompletionSource.setResult(true);
+                    } else {
+                        Toast.makeText(context, "Email ou Senha Incorretos ou Inexistentes", Toast.LENGTH_SHORT).show();
+                        taskCompletionSource.setResult(false);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            taskCompletionSource.setResult(false);
+        }
+
+        return taskCompletionSource.getTask();
+    }
     public void cadastrar(String nome, String email, String senha, String telefone, String endereco)
     {
         this.cadastraFirebaseAuth(email, senha);
@@ -67,9 +96,7 @@ public class UsuarioController {
         mAuth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
 
-                }
             }
         });
     }

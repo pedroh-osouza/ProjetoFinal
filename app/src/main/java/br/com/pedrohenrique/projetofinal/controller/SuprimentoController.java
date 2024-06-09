@@ -1,7 +1,10 @@
 package br.com.pedrohenrique.projetofinal.controller;
 
+import android.content.Context;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.DocumentReference;
@@ -10,8 +13,9 @@ import br.com.pedrohenrique.projetofinal.model.Suprimento;
 public class SuprimentoController {
 
     private FirebaseFirestore db;
-
-    public SuprimentoController() {
+    private Context context;
+    public SuprimentoController(Context context) {
+        this.context = context;
         db = FirebaseFirestore.getInstance();
     }
 
@@ -21,10 +25,14 @@ public class SuprimentoController {
     }
 
     public void cadastrar(String descricao, Integer quantidade, String unidadeMedida) {
-        UsuarioController usuarioController = new UsuarioController();
+        UsuarioController usuarioController = new UsuarioController(context);
         String uidUsuario = usuarioController.getUidUsuarioAtual();
         DocumentReference referencia = db.collection("suprimentos").document();
         Suprimento suprimento = new Suprimento(referencia.getId(), descricao, quantidade, unidadeMedida, uidUsuario);
         referencia.set(suprimento);
+    }
+
+    public Task<DocumentSnapshot> consultarSuprimento(String uid) {
+        return db.collection("suprimentos").document(uid).get();
     }
 }

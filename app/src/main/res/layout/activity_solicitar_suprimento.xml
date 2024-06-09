@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.SolicitarSuprimentoActivity">
+
+    <TextView
+        android:id="@+id/tvSupplyDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Detalhes do Suprimento"
+        android:textSize="18sp"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etNomeSolicitante"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nome do Solicitante"
+        android:inputType="text"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSupplyDetails"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etEnderecoSolicitante"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Endereço do Solicitante"
+        android:inputType="text"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etNomeSolicitante"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etContatoSolicitante"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Contato do Solicitante"
+        android:inputType="phone"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etEnderecoSolicitante"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnRequestSupply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Solicitar Suprimento"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etContatoSolicitante"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
