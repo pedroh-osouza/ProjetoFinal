@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
                     UsuarioController usuarioController = new UsuarioController();
                     usuarioController.logar(email, senha);
                     Toast.makeText(LoginActivity.this, "Login bem-sucedido", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }

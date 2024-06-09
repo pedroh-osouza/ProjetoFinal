@@ -25,6 +25,8 @@
         <activity android:name=".view.LoginActivity"/>
         <activity android:name=".view.SolicitacoesActivity"/>
         <activity android:name=".view.SuprimentosActivity"/>
+        <activity android:name=".view.HomeActivity"/>
+        <activity android:name=".view.AdicionarSuprimentoActivity"/>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ public class Suprimento {
     public String descricao;
     public Integer quantidade;
     public String unidadeMedida;
+    public String usuarioUid;
 
     public Suprimento(String uid, String descricao, Integer quantidade, String unidadeMedida, String usuarioUid) {
         this.uid = uid;
@@ -13,6 +14,4 @@ public class Suprimento {
         this.unidadeMedida = unidadeMedida;
         this.usuarioUid = usuarioUid;
     }
-
-    public String usuarioUid;
 }
