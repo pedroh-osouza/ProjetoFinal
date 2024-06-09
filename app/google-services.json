@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "986832580985",
+    "project_id": "projeto-final-dm",
+    "storage_bucket": "projeto-final-dm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986832580985:android:b29cd9d45f705d09a47fa8",
+        "android_client_info": {
+          "package_name": "br.com.pedrohenrique.projetofinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO_XmEVVew5jB_7O2Tzem4920ym4ZCul0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
