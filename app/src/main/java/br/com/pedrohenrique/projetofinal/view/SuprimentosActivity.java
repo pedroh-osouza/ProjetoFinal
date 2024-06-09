@@ -5,11 +5,11 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import br.com.pedrohenrique.projetofinal.R;
+import br.com.pedrohenrique.projetofinal.adapters.SuprimentosListAdapter;
 import br.com.pedrohenrique.projetofinal.model.Suprimento;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 public class SuprimentosActivity extends AppCompatActivity {
@@ -28,7 +28,8 @@ public class SuprimentosActivity extends AppCompatActivity {
         supplyList.add(new Suprimento("1", "Alimento enlatado", 10, "unidade", "usuario1"));
         supplyList.add(new Suprimento("2", "Água mineral", 20, "litro", "usuario2"));
 
-        ArrayAdapter<Suprimento> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, supplyList);
+        SuprimentosListAdapter adapter = new SuprimentosListAdapter(this, supplyList);
+
         listViewSupplies.setAdapter(adapter);
 
         listViewSupplies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
