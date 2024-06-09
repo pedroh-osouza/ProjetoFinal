@@ -119,12 +119,14 @@ public class DetalhesSolicitacaoActivity extends AppCompatActivity {
                     .set(updates, SetOptions.merge())
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(this, "Status da Solicitação atualizado com sucesso", Toast.LENGTH_SHORT).show();
-                        // Atualizar a visualização na tela, se necessário
-                        // Aqui você pode recarregar os dados da solicitação
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Erro ao atualizar o Status da Solicitação", Toast.LENGTH_SHORT).show();
                     });
+            if(novoStatus.equals("Concluída")) {
+                suprimentoController.excluirSuprimento(suprimentoUid);
+            }
+            finish();
         });
     }
 }

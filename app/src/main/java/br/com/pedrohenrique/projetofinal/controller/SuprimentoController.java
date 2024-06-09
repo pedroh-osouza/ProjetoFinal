@@ -2,6 +2,10 @@ package br.com.pedrohenrique.projetofinal.controller;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,4 +39,21 @@ public class SuprimentoController {
     public Task<DocumentSnapshot> consultarSuprimento(String uid) {
         return db.collection("suprimentos").document(uid).get();
     }
+    public void excluirSuprimento(String suprimentoUid) {
+        db.collection("suprimentos").document(suprimentoUid)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
+
 }

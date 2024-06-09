@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class SuprimentosActivity extends AppCompatActivity {
     private ArrayList<Suprimento> supplyList;
     private SuprimentosListAdapter adapter;
     private SuprimentoController suprimentoController;
+    private TextView tvEmptyListMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class SuprimentosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_suprimentos);
         listViewSupplies = findViewById(R.id.listViewSupplies);
         Button btnAddSupply = findViewById(R.id.btnAddSupply);
+        tvEmptyListMessage = findViewById(R.id.tvEmptyListMessage);
         supplyList = new ArrayList<>();
         adapter = new SuprimentosListAdapter(this, supplyList);
         listViewSupplies.setAdapter(adapter);
@@ -78,6 +81,11 @@ public class SuprimentosActivity extends AppCompatActivity {
                         supplyList.add(new Suprimento(uid, descricao, quantidade, unidadeMedida, usuarioUid));
                     }
                     adapter.notifyDataSetChanged();
+                    if (supplyList.isEmpty()) {
+                        tvEmptyListMessage.setVisibility(View.VISIBLE);
+                    } else {
+                        tvEmptyListMessage.setVisibility(View.GONE);
+                    }
                 } else {
 
                 }

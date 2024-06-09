@@ -26,7 +26,7 @@ public class SolicitacaoController {
 
     public Task<QuerySnapshot> consultarSolicitacoes() {
         CollectionReference suprimentosRef = db.collection("solicitacoes");
-        return suprimentosRef.get();
+        return suprimentosRef.whereNotEqualTo("status", "Concluída").get();
     }
 
     public Task<DocumentSnapshot> consultarSolicitacao(String uid) {

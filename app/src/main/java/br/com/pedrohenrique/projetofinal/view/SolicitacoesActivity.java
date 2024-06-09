@@ -2,7 +2,10 @@ package br.com.pedrohenrique.projetofinal.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +24,7 @@ public class SolicitacoesActivity extends AppCompatActivity {
     private ArrayList<Solicitacao> solicitacaoList;
     private SolicitacoesListAdapter adapter;
     private SolicitacaoController solicitacaoController;
+    private TextView tvEmptyListMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class SolicitacoesActivity extends AppCompatActivity {
         adapter = new SolicitacoesListAdapter(this, solicitacaoList);
         listViewSolicitacoes.setAdapter(adapter);
         solicitacaoController = new SolicitacaoController(this);
+        tvEmptyListMessage = findViewById(R.id.tvEmptyListMessage);
 
         consultarSolicitacoes();
         listViewSolicitacoes.setOnItemClickListener((parent, view, position, id) -> {
@@ -66,9 +71,20 @@ public class SolicitacoesActivity extends AppCompatActivity {
                         String status = document.getString("status");
                         solicitacaoList.add(new Solicitacao(uid, nomeSolicitante, enderecoSolicitante, contatoSolicitante, suprimentoUid, dataSolicitacao,status));
                     }
+                    if (solicitacaoList.isEmpty()) {
+                        tvEmptyListMessage.setVisibility(View.VISIBLE);
+                    } else {
+                        tvEmptyListMessage.setVisibility(View.GONE);
+                    }
                     adapter.notifyDataSetChanged();
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        consultarSolicitacoes();
     }
 }
