@@ -34,27 +34,10 @@ public class UsuarioController {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
-    public Usuario getUsuarioAtual() {
+    public String getUidUsuarioAtual() {
         FirebaseUser usuarioFirebase = mAuth.getCurrentUser();
-        if (usuarioFirebase != null) {
-            mDatabase.child("usuarios").child(usuarioFirebase.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                        System.out.println("tome");
-                    } else {
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    System.out.println("tome");
-                }
-            });
-        }
-        return null;
+        if(usuarioFirebase == null) return "";
+        return usuarioFirebase.getUid();
     }
 
     public void logar(String email, String senha)
