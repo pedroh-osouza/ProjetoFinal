@@ -9,8 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lista de Solicitações"
+        android:textStyle="bold"
         android:textSize="24sp"
-        android:textColor="@color/green_primary"
+        android:textColor="@color/black"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +26,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- TextView para mostrar quando a lista estiver vazia -->
     <TextView
         android:id="@+id/tvEmptyListMessage"
         android:layout_width="wrap_content"

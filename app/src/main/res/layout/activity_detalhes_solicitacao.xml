@@ -4,20 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Título da tela -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Detalhes da Solicitação"
         android:textSize="24sp"
-        android:textColor="@color/green_primary"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp" />
 
-    <!-- Nome do Solicitante -->
     <TextView
         android:id="@+id/tvNomeSolicitante"
         android:layout_width="0dp"
@@ -32,7 +31,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"/>
 
-    <!-- Endereço do Solicitante -->
     <TextView
         android:id="@+id/tvEnderecoSolicitante"
         android:layout_width="0dp"
@@ -47,7 +45,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"/>
 
-    <!-- Contato do Solicitante -->
     <TextView
         android:id="@+id/tvContatoSolicitante"
         android:layout_width="0dp"
@@ -62,7 +59,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"/>
 
-    <!-- Endereço de Entrega -->
     <TextView
         android:id="@+id/tvEnderecoEntrega"
         android:layout_width="0dp"
@@ -77,7 +73,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"/>
 
-    <!-- Contato de Entrega -->
     <TextView
         android:id="@+id/tvContatoEntrega"
         android:layout_width="0dp"
@@ -92,7 +87,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"/>
 
-    <!-- Status da Solicitação -->
     <TextView
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
@@ -105,7 +99,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
-    <!-- Botões de atualização de status -->
     <RadioGroup
         android:id="@+id/rgStatus"
         android:layout_width="wrap_content"
@@ -135,7 +128,6 @@
             android:text="Concluída"/>
     </RadioGroup>
 
-    <!-- Botão de Confirmar -->
     <Button
         android:id="@+id/btnConfirmar"
         android:layout_width="0dp"
