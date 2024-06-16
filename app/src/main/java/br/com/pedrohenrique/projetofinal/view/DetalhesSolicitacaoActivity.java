@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class DetalhesSolicitacaoActivity extends AppCompatActivity {
 
-    private TextView tvNomeSolicitante, tvEnderecoSolicitante, tvContatoSolicitante, tvEnderecoEntrega, tvContatoEntrega;
+    private TextView tvTitulo, tvNomeSolicitante, tvEnderecoSolicitante, tvContatoSolicitante, tvEnderecoEntrega, tvContatoEntrega;
     private RadioGroup rgStatus;
     private Button btnConfirmar;
     private String suprimentoUid;
@@ -36,6 +36,7 @@ public class DetalhesSolicitacaoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_solicitacao);
 
+        tvTitulo = findViewById(R.id.tvTitle);
         tvNomeSolicitante = findViewById(R.id.tvNomeSolicitante);
         tvEnderecoSolicitante = findViewById(R.id.tvEnderecoSolicitante);
         tvContatoSolicitante = findViewById(R.id.tvContatoSolicitante);
@@ -61,6 +62,7 @@ public class DetalhesSolicitacaoActivity extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 Suprimento suprimento = document.toObject(Suprimento.class);
+                                tvTitulo.setText("Detalhes da Solicitação: " + suprimento.descricao);
                                 UsuarioController usuarioController = new UsuarioController(DetalhesSolicitacaoActivity.this);
                                 usuarioController.consultarUsuario(suprimento.usuarioUid).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override

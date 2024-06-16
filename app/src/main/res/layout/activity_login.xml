@@ -16,7 +16,6 @@
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_margin="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -29,7 +28,6 @@
         android:padding="16dp"
         android:backgroundTint="@color/green_primary"
         app:layout_constraintTop_toBottomOf="@id/tvLoginTitle"
-        app:layout_constraintTop_margin="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8" />
@@ -43,7 +41,6 @@
         android:padding="16dp"
         android:backgroundTint="@color/green_primary"
         app:layout_constraintTop_toBottomOf="@id/etEmail"
-        app:layout_constraintTop_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8" />
