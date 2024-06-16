@@ -10,26 +10,29 @@
     tools:context=".view.HomeActivity">
 
     <TextView
-        android:textStyle="bold"
-        android:id="@+id/tvRegisterTitle"
+        android:id="@+id/tvHomeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
 
     <Button
         android:id="@+id/btnListSupplies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Listar Suprimentos" />
+        android:text="Listar Suprimentos"
+        android:backgroundTint="@color/green_primary"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnListRequests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Listar Solicitações" />
+        android:text="Listar Solicitações"
+        android:backgroundTint="@color/green_primary"
+        android:textColor="@color/white" />
 </LinearLayout>
