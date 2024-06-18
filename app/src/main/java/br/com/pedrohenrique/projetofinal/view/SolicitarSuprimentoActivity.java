@@ -45,7 +45,7 @@ public class SolicitarSuprimentoActivity extends AppCompatActivity {
         solicitacaoController = new SolicitacaoController(this);
 
         Places.initialize(getApplicationContext(), "AIzaSyDFpY4P6XztSphYhCuuN_OExabqj-iNiAE");
-
+        etEnderecoSolicitante.setFocusable(false);
         etEnderecoSolicitante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

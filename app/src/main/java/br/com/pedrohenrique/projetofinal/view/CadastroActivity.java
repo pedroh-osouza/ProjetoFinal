@@ -44,7 +44,7 @@ public class CadastroActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
 
         Places.initialize(getApplicationContext(), "AIzaSyDFpY4P6XztSphYhCuuN_OExabqj-iNiAE");
-
+        etAddress.setFocusable(false);
         etAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
