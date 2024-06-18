@@ -9,13 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import br.com.pedrohenrique.projetofinal.R;
 import br.com.pedrohenrique.projetofinal.adapters.SolicitacoesListAdapter;
 import br.com.pedrohenrique.projetofinal.controller.SolicitacaoController;
+import br.com.pedrohenrique.projetofinal.controller.SuprimentoController;
+import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
 import br.com.pedrohenrique.projetofinal.model.Solicitacao;
+import br.com.pedrohenrique.projetofinal.model.Suprimento;
 
 public class SolicitacoesActivity extends AppCompatActivity {
     private ListView listViewSolicitacoes;
@@ -35,7 +41,7 @@ public class SolicitacoesActivity extends AppCompatActivity {
         listViewSolicitacoes.setAdapter(adapter);
         solicitacaoController = new SolicitacaoController(this);
         tvEmptyListMessage = findViewById(R.id.tvEmptyListMessage);
-
+        tvEmptyListMessage.setVisibility(View.INVISIBLE);
         consultarSolicitacoes();
         listViewSolicitacoes.setOnItemClickListener((parent, view, position, id) -> {
             Solicitacao solicitacaoClicada = solicitacaoList.get(position);
@@ -52,6 +58,8 @@ public class SolicitacoesActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     solicitacaoList.clear();
+                    Set<String> suprimentoUids = new HashSet<>();
+
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String uid = document.getId();
                         String nomeSolicitante = document.getString("nomeSolicitante");
@@ -60,17 +68,59 @@ public class SolicitacoesActivity extends AppCompatActivity {
                         String suprimentoUid = document.getString("suprimentoUid");
                         String dataSolicitacao = document.getString("dataSolicitacao");
                         String status = document.getString("status");
-                        solicitacaoList.add(new Solicitacao(uid, nomeSolicitante, enderecoSolicitante, contatoSolicitante, suprimentoUid, dataSolicitacao,status));
+
+                        solicitacaoList.add(new Solicitacao(uid, nomeSolicitante, enderecoSolicitante, contatoSolicitante, suprimentoUid, dataSolicitacao, status));
+                        suprimentoUids.add(suprimentoUid);
                     }
-                    if (solicitacaoList.isEmpty()) {
-                        tvEmptyListMessage.setVisibility(View.VISIBLE);
-                    } else {
-                        tvEmptyListMessage.setVisibility(View.GONE);
+
+                    if (suprimentoUids.isEmpty()) {
+                        updateListView();
+                        return;
                     }
-                    adapter.notifyDataSetChanged();
+
+                    for (String suprimentoUid : suprimentoUids) {
+                        SuprimentoController suprimentoController = new SuprimentoController(SolicitacoesActivity.this);
+                        suprimentoController.consultarSuprimento(suprimentoUid).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot documentSuprimento = task.getResult();
+                                    if (documentSuprimento.exists()) {
+                                        Suprimento suprimento = documentSuprimento.toObject(Suprimento.class);
+                                        UsuarioController usuarioController = new UsuarioController(SolicitacoesActivity.this);
+                                        assert suprimento != null;
+                                        if (!suprimento.usuarioUid.equals(usuarioController.getUidUsuarioAtual())) {
+                                            removeSolicitacoesWithSuprimentoUid(suprimentoUid);
+                                        }
+                                    }
+                                }
+                                if (suprimentoUid.equals(suprimentoUids.toArray()[suprimentoUids.size() - 1])) {
+                                    updateListView();
+                                }
+                            }
+                        });
+                    }
                 }
             }
         });
+    }
+
+    private void removeSolicitacoesWithSuprimentoUid(String suprimentoUid) {
+        for (int i = 0; i < solicitacaoList.size(); i++) {
+            if (solicitacaoList.get(i).suprimentoUid.equals(suprimentoUid)) {
+                solicitacaoList.remove(i);
+                i--;
+            }
+        }
+    }
+
+    private void updateListView() {
+        if (solicitacaoList.isEmpty()) {
+            tvEmptyListMessage.setVisibility(View.VISIBLE);
+        } else {
+            tvEmptyListMessage.setVisibility(View.GONE);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override

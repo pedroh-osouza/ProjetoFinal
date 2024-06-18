@@ -99,43 +99,28 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
-    <RadioGroup
-        android:id="@+id/rgStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp">
-
-        <RadioButton
-            android:id="@+id/rbPendente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pendente"
-            android:checked="true"/>
-
-        <RadioButton
-            android:id="@+id/rbEmRota"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Em Rota"/>
-
-        <RadioButton
-            android:id="@+id/rbConcluida"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Concluída"/>
-    </RadioGroup>
-
     <Button
-        android:id="@+id/btnConfirmar"
+        android:id="@+id/btnAceitar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Atualizar Status"
+        android:text="Aceitar Solicitação"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnRecusar"/>
+
+    <Button
+        android:id="@+id/btnRecusar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Recusar Solicitação"
         app:layout_constraintTop_toBottomOf="@+id/tvStatus"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@+id/btnAceitar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
