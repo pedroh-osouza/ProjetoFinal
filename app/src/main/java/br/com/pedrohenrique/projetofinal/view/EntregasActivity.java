@@ -23,18 +23,19 @@ import br.com.pedrohenrique.projetofinal.controller.UsuarioController;
 import br.com.pedrohenrique.projetofinal.model.Solicitacao;
 import br.com.pedrohenrique.projetofinal.model.Suprimento;
 
-public class SolicitacoesActivity extends AppCompatActivity {
+public class EntregasActivity extends AppCompatActivity {
     private ListView listViewSolicitacoes;
     private ArrayList<Solicitacao> solicitacaoList;
     private SolicitacoesListAdapter adapter;
     private SolicitacaoController solicitacaoController;
-    private TextView tvEmptyListMessage;
+    private TextView tvEmptyListMessage, tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitacoes);
-
+        tvTitle = findViewById(R.id.tvTitle);
+        tvTitle.setText("Lista Solicitações para Entrega");
         listViewSolicitacoes = findViewById(R.id.listViewSolicitacoes);
         solicitacaoList = new ArrayList<>();
         adapter = new SolicitacoesListAdapter(this, solicitacaoList);
@@ -45,7 +46,7 @@ public class SolicitacoesActivity extends AppCompatActivity {
         consultarSolicitacoes();
         listViewSolicitacoes.setOnItemClickListener((parent, view, position, id) -> {
             Solicitacao solicitacaoClicada = solicitacaoList.get(position);
-            Intent intent = new Intent(SolicitacoesActivity.this, DetalhesSolicitacaoActivity.class);
+            Intent intent = new Intent(EntregasActivity.this, DetalhesEntregaActivity.class);
             intent.putExtra("suprimentoUid", solicitacaoClicada.suprimentoUid);
             intent.putExtra("solicitacaoUid", solicitacaoClicada.uid);
             startActivity(intent);
@@ -53,7 +54,7 @@ public class SolicitacoesActivity extends AppCompatActivity {
     }
 
     private void consultarSolicitacoes() {
-        solicitacaoController.consultarSolicitacoesPendentes().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        solicitacaoController.consultarSolicitacoesParaEntrega().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -79,7 +80,7 @@ public class SolicitacoesActivity extends AppCompatActivity {
                     }
 
                     for (String suprimentoUid : suprimentoUids) {
-                        SuprimentoController suprimentoController = new SuprimentoController(SolicitacoesActivity.this);
+                        SuprimentoController suprimentoController = new SuprimentoController(EntregasActivity.this);
                         suprimentoController.consultarSuprimento(suprimentoUid).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -87,7 +88,7 @@ public class SolicitacoesActivity extends AppCompatActivity {
                                     DocumentSnapshot documentSuprimento = task.getResult();
                                     if (documentSuprimento.exists()) {
                                         Suprimento suprimento = documentSuprimento.toObject(Suprimento.class);
-                                        UsuarioController usuarioController = new UsuarioController(SolicitacoesActivity.this);
+                                        UsuarioController usuarioController = new UsuarioController(EntregasActivity.this);
                                         assert suprimento != null;
                                         if (!suprimento.usuarioUid.equals(usuarioController.getUidUsuarioAtual())) {
                                             removeSolicitacoesWithSuprimentoUid(suprimentoUid);

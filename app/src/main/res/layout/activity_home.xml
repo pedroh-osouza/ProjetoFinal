@@ -32,7 +32,7 @@
         android:id="@+id/btnListRequests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Listar Solicitações"
+        android:text="Listar Solicitações Pendentes"
         android:backgroundTint="@color/green_primary"
         android:layout_marginBottom="16dp"
         android:textColor="@color/white" />

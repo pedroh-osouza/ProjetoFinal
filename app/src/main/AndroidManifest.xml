@@ -32,6 +32,8 @@
         <activity android:name=".view.AdicionarSuprimentoActivity"/>
         <activity android:name=".view.SolicitarSuprimentoActivity"/>
         <activity android:name=".view.DetalhesSolicitacaoActivity"/>
+        <activity android:name=".view.EntregasActivity"/>
+        <activity android:name=".view.DetalhesEntregaActivity"/>
     </application>
 
 </manifest>
