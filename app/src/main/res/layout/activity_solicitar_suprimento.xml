@@ -33,6 +33,7 @@
     <EditText
         android:id="@+id/etEnderecoSolicitante"
         android:layout_width="0dp"
+        android:drawableLeft="@drawable/ic_location"
         android:layout_height="wrap_content"
         android:hint="Endereço do Solicitante"
         android:inputType="text"

@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:hint="Endereço"
         android:padding="16dp"
+        android:drawableLeft="@drawable/ic_location"
         android:backgroundTint="@color/green_primary"
         app:layout_constraintTop_toBottomOf="@id/etEmail"
         app:layout_constraintStart_toStartOf="parent"
